@@ -1,9 +1,6 @@
 package com.example.validation.dto;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 
 public class User {
 
@@ -15,6 +12,9 @@ public class User {
     private String email;
     @Pattern(regexp = "^\\d{2,3}-\\d{3,4}-\\d{4}$", message = "핸드폰 번호의 양식과 맞지 않습니다. xxx-xxxx-xxxx")
     private String phoneNumber;
+
+    @Size(min=6, max=6)
+    private String reqYearMonth; // yyyyMM
 
     public String getName() {
         return name;
@@ -30,6 +30,14 @@ public class User {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public String getReqYearMonth() {
+        return reqYearMonth;
+    }
+
+    public void setReqYearMonth(String reqYearMonth) {
+        this.reqYearMonth = reqYearMonth;
     }
 
     public String getEmail() {
@@ -55,6 +63,7 @@ public class User {
                 ", age=" + age +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", reqYearMonth='" + reqYearMonth + '\'' +
                 '}';
     }
 }
