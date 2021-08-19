@@ -1,6 +1,8 @@
 package com.example.validation.dto;
 
 import javax.validation.constraints.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class User {
 
@@ -38,6 +40,16 @@ public class User {
 
     public void setReqYearMonth(String reqYearMonth) {
         this.reqYearMonth = reqYearMonth;
+    }
+
+    @AssertTrue(message = "yyyyMM의 형식에 맞지 않습니다.")
+    public boolean isReqYearMonthValidation() { // Assert를 사용할 때는 반드시 메소드의 이름이 is로 시작해야 한다
+        try {
+            LocalDate localDate = LocalDate.parse(this.reqYearMonth+"01", DateTimeFormatter.ofPattern(("yyyyMMdd")));
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
     public String getEmail() {
